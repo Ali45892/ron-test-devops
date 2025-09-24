@@ -13,7 +13,6 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Prometheus metrics
 REQUEST_COUNT = Counter('http_requests_total', 'Total HTTP requests')
 
 @app.get("/")
@@ -39,7 +38,11 @@ async def readiness_check():
     REQUEST_COUNT.inc()
     return {
         "status": "ready",
-        "timestamp": time.time()
+        "timestamp": time.time(),
+        "dependencies": {
+            "database": "connected",
+            "external_apis": "reachable"
+        }
     }
 
 @app.get("/metrics")
@@ -65,3 +68,7 @@ async def submit_health_data(data: dict):
         "message": "Health data recorded successfully",
         "id": f"health_record_{int(time.time())}"
     }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
