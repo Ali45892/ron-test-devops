@@ -18,3 +18,5 @@ terraform.tfvars
 # Environment variables
 .env
 .env.local
+__pycache__/
+github-actions-key.json
