@@ -1,0 +1,7 @@
+project_id   = "ron-test-2025"
+region       = "us-central1"
+zone         = "us-central1-a"
+environment  = "prod"
+domain_name  = "your-domain.com"
+db_password  = "secure-password-here"
+app_image    = "gcr.io/ron-test-2025/health-webapp:latest"
